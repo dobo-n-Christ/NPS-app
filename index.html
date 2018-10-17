@@ -10,13 +10,18 @@
 <body>
     <h1>Search for National Parks in Your Area!</h1>
     <form>
-        <label for="search-text">Search for parks by state<br>(use two-letter state code format)</label>
-        <input type="text" name="search-text" id="search-text" placeholder="e.g. 'CA, TX'" required>
+        <label for="search-text">Search for parks by state<br>(enter two-letter state code or state codes)</label>
+        <input type="text" name="search-text" id="search-text" placeholder="e.g. 'CA, TX'" required><br>
         <label for="max-results">Set the maximum number of results you wish to receive:</label>
-        <input type="number" name="max-results" id="max-results" value="10">
+        <input type="number" name="max-results" id="max-results" value="10"><br>
         <input type="submit">
     </form>
-    <main role="main" class="js-results"></main>
+    <main role="main">
+        <section class="hidden">
+            <h2>Search Results</h2>
+            <ul class="js-results"></ul>
+        </section>
+    </main>
     <script src="main.js"></script>
 </body>
 </html>
