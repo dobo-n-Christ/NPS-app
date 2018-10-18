@@ -11,6 +11,7 @@ function formatQueryParams(params) {
 }
 
 function displayParks(responseJson) {
+    console.log(responseJson);
     $('.js-results').empty();
     for (let i = 0; i < responseJson.data.length; i++) {
         $('.js-results').append(`
@@ -18,6 +19,7 @@ function displayParks(responseJson) {
         <li><p>${responseJson.data[i].description}</p></li>
         <li><a href="${responseJson.data[i].url}">Visit ${responseJson.data[i].fullName} website</a></li>
         `);
+        $('#results').removeClass('hidden');
     }
 }
 
@@ -30,7 +32,7 @@ function getParks(query, maxResults) {
     const queryString = formatQueryParams(params);
     const url = `${baseUrl}?${queryString}`;
     fetch(url).then(response => {
-        if (response.ok) {
+        if (response.total !== 0) {
             return response.json();
         }
         else {
