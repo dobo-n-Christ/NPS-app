@@ -46,7 +46,7 @@ function watchForm() {
     $('form').submit(event => {
         event.preventDefault();
         const searchText = $('#search-text').val();
-        const maxResults = $('#max-results').val() - 1;
+        const maxResults = ($('#max-results').val() - 1);
         getParks(searchText, maxResults);
     });
 }
