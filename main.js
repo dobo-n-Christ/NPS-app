@@ -31,14 +31,16 @@ function getParks(query, maxResults) {
     }
     const queryString = formatQueryParams(params);
     const url = `${baseUrl}?${queryString}`;
-    fetch(url).then(response => {
-        if (response.total !== 0) {
-            return response.json();
+    fetch(url)
+    .then(response => response.json())
+    .then(responseJson => {
+        if (responseJson.total > 0) {
+            displayParks(responseJson);
         }
         else {
-            throw new Error(response.statusText);
+            throw new Error('state code not found');
         }
-    }).then(responseJson => displayParks(responseJson))
+    })
     .catch(err => {
         $('.js-results').text(`Something went wrong. ${err.message}`);
     });
