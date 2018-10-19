@@ -10,6 +10,52 @@ function formatQueryParams(params) {
     return queryItems.join('&');
 }
 
+function getAddressObj(array) {
+    let i;
+    for (i = 0; i < array.length; i++) {
+        if (array[i].type === 'Physical') {
+            return array[i];
+        }
+    }
+}
+
+function getPhysAddress(response, index) {
+    const addressArray = response.data[index].addresses;
+    return getAddressObj(addressArray);
+}
+
+function determineLines(obj) {
+    if (obj.line1 !== '' && obj.line2 !== '' && obj.line3 !== '') {
+        const line123 = `${obj.line1}<br>
+        ${obj.line2}<br>
+        ${obj.line3}<br>`;
+        return line123;
+    }
+    else if (obj.line1 !== '' && obj.line2 !== '') {
+        const line12 = `${obj.line1}<br>
+        ${obj.line2}<br>`;
+        return line12;
+    }
+    else if (obj.line1 !== '' && obj.line3 !== '') {
+        const line13 = `${obj.line1}<br>
+        ${obj.line3}<br>`;
+        return line13;
+    }
+    else {
+        const line1 = `${obj.line1}<br>`;
+        return line1;
+    }
+}
+
+function formatAddress(response, index) {
+    const physAddressObj = getPhysAddress(response, index);
+    const addressLines = determineLines(physAddressObj);
+    return `
+    ${addressLines}
+    ${physAddressObj.city}, ${physAddressObj.stateCode} ${physAddressObj.postalCode}
+    `;
+}
+
 function displayParks(responseJson) {
     console.log(responseJson);
     $('.js-results').empty();
@@ -18,9 +64,8 @@ function displayParks(responseJson) {
         <li><h3>${responseJson.data[i].fullName}</h3></li>
         <li><p>${responseJson.data[i].description}</p></li>
         <li><a href="${responseJson.data[i].url}">Visit ${responseJson.data[i].fullName} website</a></li>
-        <li><h4>Addresses:</h4></li>
-        <li><p>${responseJson.data[i].addresses[0].type} Address:<br>${responseJson.data[i].addresses[0].line1}<br>${responseJson.data[i].addresses[0].line2}<br>${responseJson.data[i].addresses[0].line3}<br>${responseJson.data[i].addresses[0].city}, ${responseJson.data[i].addresses[0].stateCode} ${responseJson.data[i].addresses[0].postalCode}</p></li>
-        <li><p>${responseJson.data[i].addresses[1].type} Address:<br>${responseJson.data[i].addresses[1].line1}<br>${responseJson.data[i].addresses[1].line2}<br>${responseJson.data[i].addresses[1].line3}<br>${responseJson.data[i].addresses[1].city}, ${responseJson.data[i].addresses[1].stateCode} ${responseJson.data[i].addresses[1].postalCode}</p></li>
+        <li><h4>Address:</h4></li>
+        <li><p>${formatAddress(responseJson, i)}</p></li>
         `);
         $('#results').removeClass('hidden');
     }
