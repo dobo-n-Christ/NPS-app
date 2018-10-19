@@ -25,27 +25,40 @@ function getPhysAddress(response, index) {
 }
 
 function determineLines(obj) {
-    if (obj.line1 !== '' && obj.line2 !== '' && obj.line3 !== '') {
-        const line123 = `${obj.line1}<br>
-        ${obj.line2}<br>
-        ${obj.line3}<br>`;
-        return line123;
+    let result = ``;
+    for (prop in obj) {
+        const value = obj[prop];
+        if (value) {
+            result += `${value}<br>`;
+        }
     }
-    else if (obj.line1 !== '' && obj.line2 !== '') {
-        const line12 = `${obj.line1}<br>
-        ${obj.line2}<br>`;
-        return line12;
-    }
-    else if (obj.line1 !== '' && obj.line3 !== '') {
-        const line13 = `${obj.line1}<br>
-        ${obj.line3}<br>`;
-        return line13;
-    }
-    else {
-        const line1 = `${obj.line1}<br>`;
-        return line1;
-    }
+    return result;
 }
+
+
+
+// function determineLines(obj) {
+//     if (obj.line1 !== '' && obj.line2 !== '' && obj.line3 !== '') {
+//         const line123 = `${obj.line1}<br>
+//         ${obj.line2}<br>
+//         ${obj.line3}<br>`;
+//         return line123;
+//     }
+//     else if (obj.line1 !== '' && obj.line2 !== '') {
+//         const line12 = `${obj.line1}<br>
+//         ${obj.line2}<br>`;
+//         return line12;
+//     }
+//     else if (obj.line1 !== '' && obj.line3 !== '') {
+//         const line13 = `${obj.line1}<br>
+//         ${obj.line3}<br>`;
+//         return line13;
+//     }
+//     else {
+//         const line1 = `${obj.line1}<br>`;
+//         return line1;
+//     }
+// }
 
 function formatAddress(response, index) {
     const physAddressObj = getPhysAddress(response, index);
