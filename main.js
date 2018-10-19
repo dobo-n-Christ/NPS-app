@@ -18,6 +18,9 @@ function displayParks(responseJson) {
         <li><h3>${responseJson.data[i].fullName}</h3></li>
         <li><p>${responseJson.data[i].description}</p></li>
         <li><a href="${responseJson.data[i].url}">Visit ${responseJson.data[i].fullName} website</a></li>
+        <li><h4>Addresses:</h4></li>
+        <li><p>${responseJson.data[i].addresses[0].type} Address:<br>${responseJson.data[i].addresses[0].line1}<br>${responseJson.data[i].addresses[0].line2}<br>${responseJson.data[i].addresses[0].line3}<br>${responseJson.data[i].addresses[0].city}, ${responseJson.data[i].addresses[0].stateCode} ${responseJson.data[i].addresses[0].postalCode}</p></li>
+        <li><p>${responseJson.data[i].addresses[1].type} Address:<br>${responseJson.data[i].addresses[1].line1}<br>${responseJson.data[i].addresses[1].line2}<br>${responseJson.data[i].addresses[1].line3}<br>${responseJson.data[i].addresses[1].city}, ${responseJson.data[i].addresses[1].stateCode} ${responseJson.data[i].addresses[1].postalCode}</p></li>
         `);
         $('#results').removeClass('hidden');
     }
@@ -27,6 +30,7 @@ function getParks(query, maxResults) {
     const params = {
         stateCode: query,
         limit: maxResults,
+        fields: 'addresses',
         api_key: apiKey
     }
     const queryString = formatQueryParams(params);
