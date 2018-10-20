@@ -24,17 +24,29 @@ function getPhysAddress(response, index) {
     return getAddressObj(addressArray);
 }
 
+// function determineLines(obj) {
+//     let result = ``;
+//     for (prop in obj) {
+//         const value = obj[prop];
+//         if (value) {
+//             result += `${value}<br>`;
+//         }
+//     }
+//     return result;
+// }
+
 function determineLines(obj) {
-    let result = ``;
-    for (prop in obj) {
-        const value = obj[prop];
-        if (value) {
-            result += `${value}<br>`;
-        }
+    if (obj.line1) {
+        result += `${obj.line1}<br>`;
+    }
+    if (obj.line2) {
+        result += `${obj.line2}<br>`;
+    }
+    if (obj.line3) {
+        result += `${obj.line3}<br>`;
     }
     return result;
 }
-
 
 
 // function determineLines(obj) {
@@ -104,7 +116,7 @@ function getParks(query, maxResults) {
         }
     })
     .catch(err => {
-        $('.js-results').text(`Something went wrong. ${err.message}`);
+        $('.js-results').text(`Something went wrong: ${err.message}`);
     });
 }
 
