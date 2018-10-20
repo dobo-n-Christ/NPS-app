@@ -24,18 +24,8 @@ function getPhysAddress(response, index) {
     return getAddressObj(addressArray);
 }
 
-// function determineLines(obj) {
-//     let result = ``;
-//     for (prop in obj) {
-//         const value = obj[prop];
-//         if (value) {
-//             result += `${value}<br>`;
-//         }
-//     }
-//     return result;
-// }
-
 function determineLines(obj) {
+    let result = ``;
     if (obj.line1) {
         result += `${obj.line1}<br>`;
     }
@@ -48,6 +38,16 @@ function determineLines(obj) {
     return result;
 }
 
+// function determineLines(obj) {
+//     let result = ``;
+//     for (prop in obj) {
+//         const value = obj[prop];
+//         if (value) {
+//             result += `${value}<br>`;
+//         }
+//     }
+//     return result;
+// }
 
 // function determineLines(obj) {
 //     if (obj.line1 !== '' && obj.line2 !== '' && obj.line3 !== '') {
